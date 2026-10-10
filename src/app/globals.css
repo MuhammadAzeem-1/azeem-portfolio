@@ -1,0 +1,463 @@
+@import "tailwindcss";
+@import "./project-visual.css";
+@import "./case-study.css";
+@import "./effects.css";
+
+@theme inline {
+  --color-background: #030504;
+  --color-foreground: #f5f7fa;
+  --font-sans: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+:root { --bg: #030504; --card: #060807; --border: #354039; --text: #f5f7fa; --muted: #a7afa9; --green: #78d99a; --violet: #9368ff; --cyan: #38cfff; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 94px; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+a, button { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--green); outline-offset: 5px; }
+::selection { background: #78d99a40; color: white; }
+h1, h2, h3, p { margin: 0; }
+p { color: var(--muted); line-height: 1.7; }
+ul { margin: 0; padding: 0; list-style: none; }
+svg { flex-shrink: 0; }
+[id] { scroll-margin-top: 94px; }
+.container { width: min(1440px, calc(100% - 64px)); margin: 0 auto; }
+.skip-link { position: fixed; z-index: 100; top: -70px; left: 20px; padding: 14px 20px; color: black; background: var(--green); border-radius: 8px; }
+.skip-link:focus { top: 14px; }
+.nav-shell { width: min(1440px, calc(100% - 64px)); margin: 12px auto 16px; position: sticky; top: 0; z-index: 40; background: #030504ed; backdrop-filter: blur(16px); }
+.navigation { min-height: 60px; display: flex; align-items: center; gap: 20px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 650; font-size: 13px; }
+.brand-symbol { color: var(--green); display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid #354039; border-radius: 8px; }
+.brand-caption { display: block; margin-top: 4px; letter-spacing: 1.7px; font-size: 7px; font-weight: 400; color: #849087; }
+.desktop-links { margin: auto; display: flex; gap: 26px; color: #afb9b2; font-size: 11px; }
+.desktop-links a:hover { color: var(--green); }
+.nav-resume { display: inline-flex; align-items: center; gap: 8px; border: 1px solid #43624b; background: #78d99a0c; color: #b1e7c2; padding: 10px 14px; border-radius: 7px; font-size: 10px; }
+.nav-resume:hover { background: #78d99a18; }
+.menu-toggle { display: none; border: 0; background: none; color: var(--text); padding: 7px; }
+.mobile-links { display: grid; padding: 10px 0 16px; gap: 5px; }
+.mobile-links a { display: flex; justify-content: space-between; padding: 13px 5px; border-bottom: 1px solid var(--border); }
+.text-link { display: inline-flex; align-items: center; gap: 9px; color: var(--green); font-size: 12px; }
+.text-link:hover { color: #b4f3cb; }
+.status-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; background: var(--green); box-shadow: 0 0 0 4px #78d99a0b; }
+.green-period { color: var(--green); }
+.dashboard { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 12px; grid-template-areas: "about about about about about profile profile profile projects projects projects projects" "stack stack identity identity identity identity identity identity projects projects projects projects" "journey journey journey journey expertise expertise expertise expertise availability availability availability availability" "journey journey journey journey philosophy philosophy philosophy philosophy contact contact contact contact"; }
+.dashboard-card { min-width: 0; border: 1px solid var(--border); border-radius: 13px; padding: 26px; background: var(--card); transition: border-color .25s, box-shadow .25s; }
+.dashboard-card:hover { border-color: #506458; }
+.dashboard-card h2 { font-size: 21px; font-weight: 650; letter-spacing: -.6px; line-height: 1.3; }
+.dashboard-card h2:has(svg) { display: flex; align-items: center; gap: 10px; }
+.dashboard-card h2>svg { color: var(--green); }
+.dashboard-card-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.dashboard-card-heading>svg { color: #849087; }
+.card-caption { display: block; color: #8a988e; letter-spacing: 2px; font-size: 7px; margin-bottom: 16px; }
+.dashboard-about { grid-area: about; min-height: 284px; display: flex; flex-direction: column; }
+.dashboard-about h2 { font-size: 34px; letter-spacing: -1.1px; margin-bottom: 17px; }
+.dashboard-about>p { font-size: 12px; line-height: 1.8; }
+.dashboard-about .about-introduction { font-style: italic; color: #e0e6e1; font-size: 14px; margin-bottom: 13px; }
+.about-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; padding-top: 25px; margin-top: auto; }
+.about-bottom>span { display: flex; align-items: center; gap: 8px; color: #b4c4b9; font-size: 9px; }
+.about-bottom .text-link { font-size: 10px; }
+.dashboard-profile { grid-area: profile; display: flex; align-items: center; text-align: center; flex-direction: column; justify-content: center; padding: 22px 16px; }
+.profile-avatar { position: relative; width: 123px; height: 123px; border: 2px solid #78d99a; border-radius: 50%; background: radial-gradient(circle at 25% 15%, #243c2a, #0a100c 75%); display: grid; place-items: center; overflow: hidden; margin-bottom: 19px; }
+.profile-avatar>span { font-size: 44px; font-weight: 550; letter-spacing: -3px; }
+.profile-avatar>svg { position: absolute; bottom: 15px; color: #7a9a84; width: 16px; }
+.profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.dashboard-profile h2 { font-size: 17px; letter-spacing: -.4px; }
+.dashboard-profile>p { font-size: 10px; margin-top: 5px; }
+.profile-location { display: flex; align-items: center; gap: 6px; font-size: 9px; color: #b7c2ba; margin-top: 16px; }
+.profile-location svg { color: var(--green); }
+.profile-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; margin-top: 15px; font-size: 11px; }
+.profile-links a { display: flex; align-items: center; gap: 3px; }
+.profile-links a:hover { color: var(--green); }
+.profile-links svg { color: #87978c; width: 11px; }
+.dashboard-stack { grid-area: stack; padding: 22px 17px; }
+.dashboard-stack h2 { font-size: 17px; }
+.core-stack-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 23px 8px; margin-top: 24px; }
+.core-stack-grid>div { display: flex; flex-direction: column; align-items: center; gap: 9px; }
+.core-stack-grid span { color: #d1dad4; font-size: 10px; }
+.stack-note { font-size: 9px; line-height: 1.7; margin-top: 23px; padding: 10px; background: #244b2d; color: #c3e3cc; border-radius: 8px; font-style: italic; }
+.dashboard-identity { grid-area: identity; min-height: 310px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 25px 18px; text-align: center; }
+.identity-kicker { display: flex; gap: 8px; align-items: center; font-size: 7px; color: #8a9b90; letter-spacing: 2px; margin-bottom: 17px; }
+.identity-kicker svg { color: var(--green); }
+.dashboard-identity h1 { display: flex; align-items: center; flex-direction: column; font-size: clamp(40px, 4.5vw, 72px); line-height: 1; font-weight: 450; letter-spacing: -2px; text-transform: uppercase; }
+.dashboard-identity h1>span:last-child { display: flex; align-items: center; gap: 6px; margin-top: 1px; }
+.identity-bolt { width: 46px; height: 57px; color: #9be5ab; fill: #78d99a15; }
+.dashboard-identity>p { margin-top: 19px; font-size: 13px; color: #e3e9e5; font-weight: 550; }
+.identity-manifesto { font-size: 10px; color: #a2b0a7; max-width: 330px; margin: 9px 0 16px; line-height: 1.7; }
+.dashboard-identity>.text-link { font-size: 10px; }
+.dashboard-projects { grid-area: projects; padding: 14px 22px 22px; display: flex; flex-direction: column; }
+.project-banner { border-radius: 7px; background: #275c35; text-align: center; color: #d5eadb; font-size: 9px; font-style: italic; padding: 9px 8px; margin-bottom: 20px; }
+.dashboard-projects h2 { font-size: 28px; letter-spacing: -.8px; }
+.project-controls { display: flex; align-items: center; gap: 8px; color: #8c9c91; }
+.project-controls button { background: none; color: #bdc8c0; border: 0; display: grid; place-items: center; padding: 4px; border-radius: 4px; }
+.project-controls button:hover { background: #78d99a15; color: var(--green); }
+.project-controls>span { font-family: monospace; font-size: 8px; white-space: nowrap; }
+.dashboard-market { display: flex; gap: 5px; margin-top: 20px; }
+.dashboard-market button { background: transparent; border: 1px solid #354039; border-radius: 20px; display: flex; align-items: center; gap: 5px; color: #a6b6ac; padding: 7px 10px; font-size: 8px; }
+.dashboard-market button[aria-pressed=true] { color: #b4eac5; background: #78d99a12; border-color: #568765; }
+.dashboard-market-message { font-size: 8px; line-height: 1.6; margin: 10px 0 19px; min-height: 25px; color: #91a197; }
+.dashboard-preview-link { display: block; border: 1px solid #3c4541; border-radius: 9px; overflow: hidden; }
+.dashboard-project .project-visual { height: 210px; padding: 22px 18px; }
+.dashboard-project .mock-window { height: 169px; transform: none; }
+.dashboard-project-title { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 22px; }
+.dashboard-project-title h3 { color: var(--green); font-size: 20px; font-weight: 650; letter-spacing: -.5px; }
+.dashboard-project-title>span { font-size: 6px; letter-spacing: 1px; color: #a1c5ad; border: 1px solid #78d99a30; padding: 4px 5px; border-radius: 4px; }
+.dashboard-project-category { margin-top: 6px; color: #c8d1cb; font-size: 10px; }
+.dashboard-project-description { margin-top: 10px; font-size: 12px; line-height: 1.7; min-height: 61px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.tags>span { border: 1px solid #36413a; border-radius: 20px; padding: 6px 9px; color: #c5cfc8; font-size: 9px; }
+.dashboard-project .text-link { margin: 23px 0 20px; font-size: 12px; }
+.project-picker { display: flex; flex-wrap: wrap; gap: 5px; padding-top: 15px; margin-top: auto; border-top: 1px solid #27312b; }
+.project-picker button { padding: 6px 8px; border: 0; border-radius: 5px; background: transparent; color: #94a49a; font-size: 8px; }
+.project-picker button[aria-pressed=true] { background: #78d99a15; color: #a9e6bc; }
+.project-picker button:hover { color: white; }
+.dashboard-journey { grid-area: journey; padding: 29px; }
+.dashboard-journey h2 { font-size: 25px; }
+.timeline { margin-top: 34px; padding-left: 8px; }
+.timeline-item { position: relative; border-left: 1px solid #4a7455; padding: 0 0 37px 22px; }
+.timeline-item:last-child { padding-bottom: 6px; }
+.timeline-dot { position: absolute; left: -5px; top: 4px; width: 9px; height: 9px; border-radius: 50%; background: #78d99a; box-shadow: 0 0 0 4px #78d99a0b; }
+.job-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 7px; }
+.job-heading h3 { font-size: 14px; font-weight: 600; }
+.present-badge { color: #93d9a8; background: #78d99a10; border-radius: 4px; padding: 4px 7px; font-size: 8px; }
+.company { color: #bdc7c0; font-size: 12px; margin-top: 7px; line-height: 1.3; }
+.job-dates { font-size: 10px; margin-top: 6px; color: #91a097; }
+.small-note { font-size: 8px; color: #8b9c91; margin-top: 28px; line-height: 1.7; }
+.journey-footnote { display: flex; align-items: center; gap: 12px; margin-top: 31px; border-top: 1px solid #29362e; padding-top: 23px; color: #7f9988; font-size: 10px; line-height: 1.7; }
+.journey-footnote strong { color: #b9c9be; font-weight: 500; }
+.dashboard-expertise { grid-area: expertise; }
+.dashboard-expertise h2,.dashboard-availability h2 { font-size: 18px; }
+.capability-list { margin-top: 20px; }
+.capability-list>div { display: flex; gap: 12px; align-items: center; padding: 13px 0; border-bottom: 1px solid #253029; }
+.capability-list>div:last-child { border: 0; padding-bottom: 0; }
+.capability-number { font-family: monospace; font-size: 9px; color: #78d99a; }
+.capability-list h3 { font-size: 11px; font-weight: 550; }
+.capability-list p { font-size: 8px; margin-top: 5px; color: #94a89b; }
+.capability-list svg { margin-left: auto; color: #62746a; }
+.dashboard-availability { grid-area: availability; }
+.dashboard-availability>p { font-size: 12px; margin-top: 23px; }
+.market-list { margin-top: 22px; display: grid; gap: 13px; }
+.market-list>div { display: flex; align-items: center; gap: 10px; color: #d1dbd4; font-size: 12px; }
+.market-list svg { color: #7abb8c; }
+.market-list svg:last-child { margin-left: auto; opacity: .65; }
+.dashboard-philosophy { grid-area: philosophy; }
+.dashboard-philosophy h2,.dashboard-contact h2 { font-size: 17px; }
+.dashboard-philosophy>p { margin-top: 18px; font-size: 12px; }
+.values { display: flex; gap: 13px; flex-wrap: wrap; margin-top: 21px; color: #a6c5b0; font-size: 8px; }
+.values>span:before { content: "•"; margin-right: 5px; color: var(--green); }
+.dashboard-contact { grid-area: contact; }
+.dashboard-contact>p { margin-top: 18px; font-size: 12px; }
+.contact-email { display: flex; gap: 8px; align-items: center; justify-content: space-between; color: var(--green); border-bottom: 1px solid #3c6247; padding-bottom: 12px; margin-top: 23px; font-size: 13px; overflow-wrap: anywhere; }
+.contact-email:hover { color: #b4f3cb; }
+.footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding: 26px 0; color: #8a9a90; font-size: 9px; }
+.footer-brand { display: flex; align-items: center; gap: 8px; color: #b9c8bf; font-size: 10px; }
+.footer>a:last-child { display: flex; align-items: center; gap: 7px; }
+.button { display: inline-flex; gap: 12px; align-items: center; border-radius: 8px; padding: 14px 20px; font-weight: 600; font-size: 12px; }
+.primary { background: var(--green); color: #08100a; }
+.eyebrow { font-size: 9px; letter-spacing: 2px; color: #8a9b90; }
+.section-eyebrow { margin-bottom: 14px; display: block; font-size: 8px; }
+.gradient-text { color: var(--green); }
+.panel { padding: 28px; background: var(--card); border: 1px solid var(--border); border-radius: 13px; }
+.real-preview { display: flex; align-items: center; justify-content: center; padding: 12px; background: #10151e; }
+.real-preview img { width: 100%; height: 100%; object-fit: contain; border-radius: 7px; }
+@media(min-width:1600px) {
+  .container,.nav-shell { width: min(1700px,calc(100% - 80px)); }
+  .dashboard-card { padding: 32px; }
+  .dashboard-projects { padding: 16px 28px 28px; }
+  .dashboard-about { min-height: 312px; }
+  .dashboard-about h2 { font-size: 40px; }
+  .dashboard-about .about-introduction { font-size: 17px; }
+  .dashboard-about>p { font-size: 14px; }
+  .dashboard-identity { min-height: 330px; }
+  .dashboard-identity h1 { font-size: 81px; }
+  .dashboard-project .project-visual { height: 235px; padding: 25px; }
+  .dashboard-project .mock-window { height: 185px; }
+  .profile-avatar { width: 150px; height: 150px; }
+  .dashboard-stack { padding: 26px 20px; }
+  .core-stack-grid { gap: 30px 12px; }
+}
+@media(max-width:1150px) {
+  .container,.nav-shell { width: calc(100% - 40px); }
+  .dashboard { grid-template-columns: repeat(8,minmax(0,1fr)); grid-template-areas: "about about about about about profile profile profile" "stack stack identity identity identity projects projects projects" "journey journey journey journey journey projects projects projects" "journey journey journey journey journey expertise expertise expertise" "availability availability availability availability philosophy philosophy philosophy philosophy" "contact contact contact contact contact contact contact contact"; }
+  .dashboard-card { padding: 23px; }
+  .dashboard-about { min-height: 265px; }
+  .dashboard-profile { padding: 20px 14px; }
+  .dashboard-stack { padding: 23px 15px; }
+  .dashboard-identity { grid-column: 3 / 6; min-height: 340px; padding: 25px 12px; }
+  .dashboard-identity h1 { font-size: 36px; letter-spacing: -1px; }
+  .identity-bolt { height: 39px; width: 29px; }
+  .dashboard-identity>p { font-size: 11px; }
+  .dashboard-identity .identity-manifesto { font-size: 9px; }
+  .dashboard-projects { padding: 13px 19px 20px; }
+  .project-controls { gap: 3px; }
+  .dashboard-projects h2 { font-size: 23px; }
+  .dashboard-project .project-visual { height: 190px; padding: 17px 12px; }
+  .dashboard-project .mock-window { height: 156px; }
+  .dashboard-project-description { font-size: 11px; }
+  .dashboard-market { flex-wrap: wrap; }
+}
+@media(max-width:800px) {
+  .desktop-links { display: none; }
+  .nav-resume { margin-left: auto; }
+  .menu-toggle { display: block; }
+  .dashboard { grid-template-columns: repeat(2,minmax(0,1fr)); grid-template-areas: "about profile" "identity identity" "projects stack" "projects availability" "journey expertise" "philosophy contact"; }
+  .dashboard-card { grid-column: auto; grid-row: auto; }
+  .dashboard-about { grid-area: about; }
+  .dashboard-profile { grid-area: profile; }
+  .dashboard-identity { grid-area: identity; min-height: 310px; }
+  .dashboard-identity h1 { font-size: 65px; }
+  .identity-bolt { height: 60px; width: 43px; }
+  .dashboard-identity>p { font-size: 14px; }
+  .dashboard-projects { grid-area: projects; }
+  .dashboard-stack { grid-area: stack; }
+  .dashboard-availability { grid-area: availability; }
+  .dashboard-journey { grid-area: journey; }
+  .dashboard-expertise { grid-area: expertise; }
+  .dashboard-philosophy { grid-area: philosophy; }
+  .dashboard-contact { grid-area: contact; }
+  .dashboard-about h2 { font-size: 30px; }
+  .dashboard-about .about-introduction { font-size: 13px; }
+  .dashboard-about>p { font-size: 11px; }
+  .about-bottom { align-items: start; flex-direction: column; }
+  .core-stack-grid { grid-template-columns: repeat(3,1fr); }
+  .core-stack-grid span { font-size: 9px; }
+  .stack-note { font-size: 10px; }
+  .dashboard-stack .stack-note br { display: none; }
+  .dashboard-journey h2 { font-size: 21px; }
+  .dashboard-expertise h2,.dashboard-availability h2 { font-size: 16px; }
+  .dashboard-philosophy h2,.dashboard-contact h2 { font-size: 16px; }
+}
+@media(max-width:580px) {
+  .container,.nav-shell { width: calc(100% - 28px); }
+  .nav-shell { margin: 4px auto 10px; }
+  .navigation { min-height: 59px; gap: 8px; }
+  .brand { font-size: 11px; gap: 7px; }
+  .brand-symbol { width: 29px; height: 29px; }
+  .brand-symbol svg { width: 18px; }
+  .brand-caption { font-size: 6px; letter-spacing: 1.3px; }
+  .nav-resume { padding: 9px 8px; gap: 3px; font-size: 8px; }
+  .nav-resume svg { width: 12px; }
+  .menu-toggle { padding: 5px; }
+  .menu-toggle svg { width: 20px; }
+  .dashboard { grid-template-columns: minmax(0,1fr); grid-template-areas: "identity" "about" "profile" "projects" "stack" "journey" "expertise" "availability" "philosophy" "contact"; gap: 10px; }
+  .dashboard-card { padding: 25px; }
+  .dashboard-identity { min-height: 330px; padding: 30px 15px; }
+  .dashboard-identity h1 { font-size: clamp(35px,10vw,59px); letter-spacing: -1.3px; }
+  .identity-bolt { height: 49px; width: 35px; }
+  .dashboard-identity>p { font-size: 12px; }
+  .identity-manifesto { max-width: 270px; }
+  .dashboard-identity .identity-manifesto { font-size: 10px; }
+  .dashboard-about h2 { font-size: 33px; }
+  .dashboard-about .about-introduction { font-size: 15px; }
+  .dashboard-about>p { font-size: 12px; }
+  .about-bottom { flex-direction: row; align-items: center; }
+  .dashboard-profile { min-height: 305px; }
+  .profile-avatar { width: 140px; height: 140px; }
+  .profile-avatar>span { font-size: 53px; }
+  .dashboard-profile h2 { font-size: 19px; }
+  .dashboard-profile>p { font-size: 11px; }
+  .profile-location { font-size: 10px; }
+  .profile-links { font-size: 12px; }
+  .dashboard-projects { padding: 14px 22px 22px; }
+  .dashboard-projects h2 { font-size: 28px; }
+  .project-controls { gap: 6px; }
+  .project-banner { font-size: 9px; }
+  .dashboard-market button { font-size: 9px; padding: 8px 10px; }
+  .dashboard-market-message { font-size: 9px; margin-bottom: 20px; min-height: auto; }
+  .dashboard-project .project-visual { height: 210px; padding: 20px 15px; }
+  .dashboard-project .mock-window { height: 170px; }
+  .dashboard-project-description { font-size: 12px; min-height: auto; }
+  .dashboard-project-title h3 { font-size: 23px; }
+  .project-picker button { font-size: 9px; padding: 8px; }
+  .core-stack-grid { gap: 27px 12px; }
+  .core-stack-grid svg { width: 36px; height: 36px; }
+  .core-stack-grid span { font-size: 11px; }
+  .stack-note { padding: 12px; font-size: 11px; }
+  .dashboard-stack h2 { font-size: 21px; }
+  .dashboard-journey h2 { font-size: 25px; }
+  .job-heading h3 { font-size: 15px; }
+  .company { font-size: 13px; }
+  .job-dates { font-size: 11px; }
+  .dashboard-expertise h2,.dashboard-availability h2 { font-size: 20px; }
+  .capability-list h3 { font-size: 13px; }
+  .capability-list p { font-size: 10px; line-height: 1.6; }
+  .capability-list>div { padding: 16px 0; }
+  .dashboard-availability>p { font-size: 13px; }
+  .market-list>div { font-size: 13px; }
+  .dashboard-philosophy h2,.dashboard-contact h2 { font-size: 19px; }
+  .dashboard-philosophy>p,.dashboard-contact>p { font-size: 13px; }
+  .contact-email { font-size: 13px; }
+  .footer { padding: 23px 2px; font-size: 8px; }
+  .footer>span { width: 100%; order: 3; }
+}
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior: auto; }
+  *,*:before,*:after { transition: none!important; animation: none!important; }
+}
+
+/* Refinement: the hero and selected work lead; supporting cards stay compact. */
+:root { --border: #2b3632; --muted: #aeb9b5; }
+.dashboard { grid-template-areas: "about about about about about about about about projects projects projects projects" "profile profile stack stack identity identity identity identity projects projects projects projects" "journey journey journey journey expertise expertise expertise expertise availability availability availability availability" "journey journey journey journey philosophy philosophy philosophy philosophy contact contact contact contact"; }
+.dashboard-card { background: #060a09; border-radius: 17px; }
+.dashboard-about { min-height: 398px; padding: 34px 38px; position: relative; overflow: hidden; background: radial-gradient(ellipse at 100% 0%, #38cfff0a, transparent 60%), radial-gradient(ellipse at 5% 100%, #78d99a0c, transparent 65%), #060a09; border-color: #426054; }
+.hero-eyebrow { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 12px; color: #dce9e1; }
+.hero-role { color: #9dacaa; padding-left: 10px; border-left: 1px solid #365047; }
+.dashboard-about h1 { font-size: clamp(35px, 3.4vw, 54px); font-weight: 600; letter-spacing: -2px; line-height: 1.08; margin: 24px 0 18px; }
+.hero-gradient { background: linear-gradient(100deg, #89dfaa 0%, #75dbe6 60%, #bda5f5); background-clip: text; color: transparent; }
+.dashboard-about .hero-introduction { font-size: 14px; font-style: normal; line-height: 1.7; max-width: 580px; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
+.button { min-height: 44px; transition: background .2s, box-shadow .2s, transform .2s; }
+.button:hover { transform: translateY(-2px); }
+.primary:hover { background: #a0edbb; box-shadow: 0 4px 24px #78d99a25; }
+.secondary { border: 1px solid #49605b; background: #0b1412; color: #e0e8e5; }
+.secondary:hover { border-color: #75dbe6; background: #10211e; }
+.hero-positioning { display: flex; gap: 10px; align-items: center; color: #74cabb; margin-top: 26px; }
+.hero-positioning strong { font-size: 10px; font-weight: 600; color: #b9d4c9; }
+.hero-positioning span { display: block; font-size: 10px; color: #a0b0aa; margin-top: 4px; }
+.dashboard-profile { padding: 22px 12px; }
+.profile-avatar { width: 90px; height: 90px; margin-bottom: 14px; border-width: 1px; }
+.profile-avatar>span { font-size: 34px; letter-spacing: -2px; }
+.profile-avatar>svg { bottom: 9px; }
+.dashboard-profile h2 { font-size: 13px; }
+.dashboard-profile>p { font-size: 9px; }
+.profile-location { font-size: 9px; margin-top: 12px; }
+.dashboard-stack { padding: 22px 16px; }
+.core-stack-grid { gap: 17px 6px; margin-top: 20px; }
+.core-stack-grid svg { width: 26px; height: 26px; }
+.stack-note { margin-top: 18px; background: #78d99a0b; border: 1px solid #78d99a15; font-style: normal; }
+.dashboard-identity { grid-area: identity; min-height: 280px; padding: 26px; align-items: flex-start; text-align: left; background: radial-gradient(ellipse at 90% 0%, #9368ff09, transparent 70%), #060a09; }
+.identity-kicker { margin-bottom: 16px; font-size: 8px; color: #92a7a1; }
+.dashboard .dashboard-identity h2 { display: block; max-width: 100%; font-size: 30px; font-weight: 500; letter-spacing: -1px; line-height: 1.1; }
+.dashboard-identity h2>span { display: flex; align-items: center; gap: 10px; color: #d7e4df; margin-top: 3px; }
+.identity-bolt { width: 21px; height: 26px; color: #b99cee; animation: none; }
+.dashboard-identity>p { margin-top: 17px; font-size: 11px; font-weight: 400; line-height: 1.8; color: #a6b4ae; }
+.engineering-path { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; margin-top: 18px; color: #9dc6b5; font-size: 9px; }
+.engineering-path span:nth-child(3) { color: #8bcbd9; }
+.engineering-path span:last-child { color: #b7a2de; }
+.dashboard-projects { padding: 22px; border-color: #504265; background: radial-gradient(ellipse at 100% 0%, #9368ff0b, transparent 55%), #060a09; }
+.project-banner { font-size: 8px; letter-spacing: 1.5px; font-style: normal; background: transparent; color: #ab95d6; text-align: left; padding: 0; margin-bottom: 14px; }
+.dashboard-projects h2 { font-size: 24px; }
+.project-controls { gap: 2px; }
+.project-controls button { min-width: 28px; min-height: 32px; }
+.dashboard-market { margin-top: 16px; }
+.dashboard-market button { min-height: 36px; font-size: 9px; }
+.dashboard-market-message { font-size: 10px; margin: 8px 0 16px; min-height: 32px; }
+.dashboard-preview-link { border-color: #60507e; transition: border-color .25s, box-shadow .25s; }
+.dashboard-preview-link:hover { border-color: #ae90e8; box-shadow: 0 0 24px #9368ff20; }
+.dashboard-project .project-visual { height: 248px; padding: 22px 16px 30px; }
+.dashboard-project .mock-window { height: 196px; }
+.dashboard-preview-link:hover .mock-window { transform: translateY(-2px); }
+.dashboard-project .mock-top { height: 27px; font-size: 7px; }
+.dashboard-project .mock-content { height: calc(100% - 27px); }
+.dashboard-project .mock-sidebar { width: 35px; gap: 14px; padding-top: 13px; }
+.dashboard-project .mock-main { padding: 15px 12px; }
+.dashboard-project .mock-heading { font-size: 9px; }
+.dashboard-project .mock-live { font-size: 6px; }
+.dashboard-project .mock-prompt { margin-top: 20px; }
+.dashboard-project .mock-prompt div { font-size: 9px; }
+.dashboard-project .mock-prompt div>span { font-size: 6px; }
+.dashboard-project .mock-tools>span { font-size: 6px; padding: 5px; }
+.dashboard-project .mock-input { font-size: 7px; padding: 9px; }
+.dashboard-project .illustration-label { font-size: 7px; bottom: 11px; }
+.dashboard-project-title { margin-top: 17px; }
+.dashboard-project-title h3 { font-size: 25px; color: #e4dcf5; }
+.dashboard-project-title>span { color: #c8b3ed; border-color: #9368ff40; font-size: 7px; padding: 5px 7px; }
+.dashboard-project-category { color: #a99acb; font-size: 11px; }
+.dashboard-project-description { margin-top: 9px; min-height: 0; font-size: 12px; }
+.project-engineering { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px 8px; margin-top: 17px; }
+.project-engineering li { display: flex; gap: 6px; align-items: flex-start; color: #b5c7c0; font-size: 9px; line-height: 1.5; }
+.project-engineering svg { color: #86d6b2; margin-top: 1px; }
+.dashboard-project .tags { gap: 5px; margin-top: 15px; }
+.dashboard-project .tags>span { font-size: 8px; padding: 5px 7px; }
+.dashboard-project .text-link { margin: 18px 0 21px; color: #bca2f0; }
+.project-slide-frame { min-height: 0; }
+.project-picker { margin-top: 0; gap: 4px; }
+.project-picker button { min-height: 36px; font-size: 9px; }
+.project-picker button[aria-pressed=true] { background: #9368ff17; color: #c9b2ef; }
+.project-rotation-track { margin-top: auto; }
+.rotation-progress { background: linear-gradient(90deg, #78d99a, #9a79e4); }
+.dashboard-journey { padding: 26px; }
+.timeline { margin-top: 27px; }
+.timeline-item { padding-bottom: 30px; }
+.journey-footnote { margin-top: 26px; }
+.capability-list h3 { font-size: 12px; }
+.capability-list p { font-size: 9px; }
+.capability-number { color: #8cd4dc; }
+.dashboard-expertise h2>svg { color: #8cd4dc; }
+.dashboard-philosophy h2>svg { color: #b69bdd; }
+.nav-shell { border-bottom: 1px solid #2b363280; }
+.desktop-links { font-size: 12px; }
+.nav-resume { font-size: 11px; min-height: 40px; }
+@media(min-width:1600px) {
+  .dashboard-about { padding: 40px; }
+  .dashboard-about h1 { font-size: 64px; }
+  .dashboard-about .hero-introduction { font-size: 16px; }
+  .dashboard-project .project-visual { height: 278px; }
+  .dashboard-project .mock-window { height: 226px; }
+  .dashboard-project-description { font-size: 14px; }
+  .project-engineering li { font-size: 11px; }
+}
+@media(max-width:1150px) {
+  .dashboard { grid-template-columns: repeat(8,minmax(0,1fr)); grid-template-areas: "about about about about about projects projects projects" "profile profile identity identity identity projects projects projects" "stack stack identity identity identity projects projects projects" "journey journey journey journey expertise expertise expertise expertise" "availability availability availability availability philosophy philosophy philosophy philosophy" "contact contact contact contact contact contact contact contact"; }
+  .dashboard-about { padding: 28px; }
+  .dashboard-about h1 { font-size: clamp(34px,4.3vw,48px); letter-spacing: -1.4px; }
+  .dashboard-projects { padding: 20px 16px; }
+  .dashboard-projects h2 { font-size: 20px; }
+  .project-controls>span { display: none; }
+  .dashboard-market { flex-wrap: wrap; }
+  .dashboard-profile { min-height: 220px; }
+  .dashboard-identity { justify-content: center; grid-area: identity; min-height: 0; }
+  .dashboard-stack .core-stack-grid { grid-template-columns: repeat(3,1fr); }
+}
+@media(max-width:800px) {
+  .dashboard { grid-template-columns: repeat(2,minmax(0,1fr)); grid-template-areas: "about about" "projects projects" "profile identity" "stack stack" "journey expertise" "availability philosophy" "contact contact"; }
+  .dashboard-about { min-height: 0; padding: 32px; }
+  .dashboard-about h1 { font-size: 48px; }
+  .dashboard-projects { padding: 26px; }
+  .dashboard-projects h2 { font-size: 26px; }
+  .project-controls>span { display: block; }
+  .dashboard-project .project-visual { height: 280px; padding: 24px 35px 30px; }
+  .dashboard-project .mock-window { height: 226px; }
+  .dashboard-project .mock-heading { font-size: 13px; }
+  .dashboard-project .mock-prompt div { font-size: 13px; }
+  .dashboard-project .mock-prompt div>span { font-size: 9px; }
+  .dashboard-project .mock-tools>span { font-size: 8px; }
+  .dashboard-project-description { font-size: 14px; }
+  .project-engineering li { font-size: 11px; }
+  .dashboard-identity { padding: 25px; min-height: 0; }
+  .dashboard-profile { min-height: 270px; }
+}
+@media(max-width:580px) {
+  .dashboard { grid-template-columns: minmax(0,1fr); grid-template-areas: "about" "projects" "profile" "identity" "stack" "journey" "expertise" "availability" "philosophy" "contact"; }
+  .dashboard-about { padding: 27px 22px; }
+  .hero-eyebrow { font-size: 11px; gap: 8px; }
+  .hero-role { width: 100%; border: 0; padding: 3px 0 0 14px; }
+  .dashboard-about h1 { font-size: clamp(26px,7.8vw,46px); letter-spacing: -1.1px; margin-top: 23px; }
+  .dashboard-about .hero-introduction { font-size: 13px; }
+  .hero-actions { gap: 8px; }
+  .hero-actions .button { font-size: 11px; padding: 13px 14px; gap: 8px; }
+  .hero-positioning span { font-size: 10px; line-height: 1.6; }
+  .dashboard-projects { padding: 23px 20px; }
+  .dashboard-projects h2 { font-size: 23px; }
+  .project-controls { gap: 0; }
+  .project-controls>span { font-size: 7px; }
+  .dashboard-project .project-visual { height: 240px; padding: 20px 12px 30px; }
+  .dashboard-project .mock-window { height: 190px; }
+  .dashboard-project .mock-heading { font-size: 8px; }
+  .dashboard-project .mock-prompt div { font-size: 9px; }
+  .dashboard-project .mock-prompt div>span { font-size: 6px; }
+  .dashboard-project .mock-tools>span { font-size: 6px; }
+  .dashboard-project-description { font-size: 13px; }
+  .project-engineering li { font-size: 10px; }
+  .dashboard-identity { padding: 26px; min-height: 0; }
+  .dashboard-identity h2 { font-size: 32px; }
+  .dashboard-identity>p { font-size: 13px; }
+  .dashboard-profile { min-height: 260px; }
+  .dashboard-profile h2 { font-size: 17px; }
+  .dashboard-profile>p { font-size: 11px; }
+  .profile-avatar { width: 100px; height: 100px; }
+  .nav-resume { font-size: 9px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .button:hover,.dashboard-preview-link:hover .mock-window { transform: none; }
+}
